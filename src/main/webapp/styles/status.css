@@ -1,0 +1,24 @@
+@charset "ISO-8859-1";
+.status{
+    margin-right: 130px;
+    width: max-content;
+    padding: 20px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: center;
+    border-radius: 30px;
+    box-shadow: 1px 1px 5px gray, 1px 1px 5px gray, 1px 1px 5px gray, 1px 1px 5px gray;
+}
+h1{
+    color: blue;
+    text-transform: uppercase;
+    text-decoration: underline;
+    font-size: 2rem;
+}
+
+h2{
+    color: rgba(45, 99, 13, 0.995);
+    text-transform: capitalize;
+}

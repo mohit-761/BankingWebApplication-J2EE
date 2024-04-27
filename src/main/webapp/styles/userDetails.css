@@ -1,0 +1,20 @@
+@charset "ISO-8859-1";
+
+table {
+	border-collapse: collapse;
+}
+
+th {
+	text-transform: capitalize;
+}
+
+tr {
+	height: 70px;
+}
+
+table td, th {
+	width: 200px;
+	padding: 10px;
+	text-align: center;
+	font-size: 20px;
+}

@@ -1,0 +1,281 @@
+*{
+    margin: 0; 
+    padding: 0;
+    box-sizing: border-box;
+    font-family:  sans-serif;
+}
+
+
+body,html{
+    background-color: #41C9E2;
+}
+
+li{
+    list-style: none;
+    text-transform: uppercase;
+}
+
+.navbar > ul{
+    display: flex;
+    gap: 80px;
+    justify-content: center;
+    align-items: center;   
+}
+
+.navbar-sublist{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.heading{
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #5356FF;
+    text-shadow: 2px 2px 4px navy;
+}
+
+.subheading{
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #F7EEDD;
+    text-shadow: 2px 2px 4px gray;
+}
+
+.navbar-links > ul{
+    display: flex;
+    justify-content: space-around;
+    align-items: center; 
+    height: 80px;
+    background-color: #008DDA;  
+    margin: 50px 0;
+}
+
+a{ 
+    text-decoration: none;
+    color: white;
+}
+
+.active, a:hover{
+    text-decoration: underline;
+    color: darkorange;
+}
+
+.main{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+form{
+    padding: 30px;
+    width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0 60px 0;
+    box-shadow: 1px 1px 6px gray, 1px 1px 6px gray, 1px 1px 6px gray, 1px 1px 6px gray;
+    border-radius: 20px;
+}
+
+form section{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+form label{
+    font-size: 18px;
+    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+}
+
+form input{
+    height: 40px;
+    width: 300px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    font-size: 20px;
+}
+
+
+form button{
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 20px;
+    border: none;   
+}
+
+button:hover{
+    border: 2px solid white;
+    background-color:#41C9E2;
+    color: blue;
+}
+
+.warning{
+    height: 40px;
+    text-align: center;
+    text-transform: capitalize;
+    color: orangered;
+    font-size: 24px;
+}
+
+
+.card{
+    margin: 80px 0 30px 50px;
+    padding: 15px;
+    width: 390px;
+    height: 220px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: gray;
+    background-image: url("../images/map.png");
+    background-size: cover;
+    background-blend-mode: darken;
+    position: relative;
+    transform: rotate(-10deg);
+    box-shadow: 1px 2px 1px green, 1px 2px 1px  green, 1px 2px 1px  green, 1px 2px 1px  green;
+}
+
+.card img{
+    width: 50px;
+    height: auto;
+    transform: rotate(92deg);
+}
+
+.card p{
+    text-transform: uppercase;
+    color: rgb(255, 254, 254);
+}
+
+.card-title{
+    font-size: 19px;
+    font-weight: 600;
+    color: white;
+    align-self: flex-end;
+}
+
+.card-number{
+    font-size: 20px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+.expiry{
+    align-self: center;
+}
+
+.card-logo{
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+    background-color: rgb(248, 10, 10); 
+    position: absolute;
+    bottom: 10px;
+    right: 18%;
+    z-index: 1;
+}
+
+.card-logo2{
+    right: 10%;
+    background-color: orange;
+    z-index: 0;
+}
+
+@media (min-width: 579px)and(max-width: 1010px){
+    .navbar > ul{
+        margin-top: 2rem;
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .heading{
+        font-size: 3rem;
+    }
+    .subheading{
+        font-size: 2rem;
+    }
+    .navbar-links > ul{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 200px;
+        height: max-content;
+        margin: 50px 20px;
+        border-radius: 10px;
+    } 
+    .navbar-links > ul li{
+        justify-self: center;
+        font-size: 25px;
+        margin: 30px 5px;
+    }
+
+    .main{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    form{
+            margin-left: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            justify-content: center;
+            align-items: center;
+    } 
+    
+    form input{
+        height: 30px;
+        width: 200px;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+    }
+
+    form label{
+        font-size: 25px;
+        text-transform: capitalize;
+        display: flex;
+        align-items: center;
+    }
+
+    .card{
+        position: absolute;
+        top: 40%;
+        left: 45%;
+        transform: rotate(-30deg);
+    }
+
+    .warning{
+        font-size: 24px;
+        width: max-content;
+    }
+
+}
+
+
+@media (max-width: 579px){	
+    .card{
+        position: absolute;
+        top: 20%;
+        left: 45%;
+        transform: rotate(-30deg);
+    }
+    .logo img{
+        width: 250px;
+        height: 170px;
+        margin-left: 80px;
+    }
+} 
