@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/GetDetails")
 public class GetDetails extends HttpServlet {
@@ -29,7 +30,7 @@ public class GetDetails extends HttpServlet {
 			String email = request.getParameter("mail");
 			long account_num = Long.parseLong(request.getParameter("account_num"));
 			String password = request.getParameter("password");
-
+			
 			// CREATING CONNECTION USING
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "projects", "projects");
@@ -39,11 +40,15 @@ public class GetDetails extends HttpServlet {
 			ps.setString(3, email);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
+				int id = rs.getInt(1);
+				if(id==1) {
 				ResultSetMetaData rsmd = rs.getMetaData();
 				int columnCount = rsmd.getColumnCount();
 				String[] userDetails = new String[columnCount];
 				String[] columnName = new String[columnCount];
-								
+				
+				HttpSession session = request.getSession();
+				session.setAttribute("email", email);
 				for(int i = 1; i<= columnCount; i++) {
 					userDetails[i-1] = rs.getString(i);
 					columnName[i-1] = rsmd.getColumnName(i);
@@ -53,6 +58,12 @@ public class GetDetails extends HttpServlet {
 				request.setAttribute("userDetails", userDetails);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("./userDetails.jsp");
 				dispatcher.forward(request, response);
+				}else {
+					warning = "Account does not exits or deleted";
+					request.setAttribute("warning", warning);
+					RequestDispatcher dispatcher = request.getRequestDispatcher("getDetails.jsp");
+					dispatcher.forward(request, response);
+				}// id
 			} else {
 				warning = "Result Not Found Please Enter Correct Details";
 				request.setAttribute("warning", warning);

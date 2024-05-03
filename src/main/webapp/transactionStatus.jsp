@@ -27,11 +27,11 @@
             <ul>
               <li><a class="active" href="index.html">Home</a></li>
               <li><a href="newCustomer.jsp">new account</a></li>
-              <li><a href="getDetails.jsp">login</a></li>
-              <li><a href="depositeMoney.jsp">deposite</a></li>
+              <li><a href="getDetails.jsp">get details</a></li>
+              <li><a href="depositeMoney.jsp">deposit</a></li>
               <li><a href="withdrawMoney.jsp">withdraw</a></li>
               <li><a href="transferMoney.jsp">transfer</a></li>
-              <li><a href="deactivateAc.jsp"> close ac</a></li>
+              <li><a href="deactivateAc.jsp"> close account</a></li>
               <li><a href="about.html">about</a></li>
             </ul>
           </div>

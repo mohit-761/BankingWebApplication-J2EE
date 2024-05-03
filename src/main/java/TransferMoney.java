@@ -33,18 +33,22 @@ public class TransferMoney extends HttpServlet {
 			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "projects", "projects");
 
 			// GETTING CUSTOMERS DETAILS
-			PreparedStatement ps = con.prepareStatement("select balance from sdfc_bank_pro where account_num = ? and password = ?");
+			PreparedStatement ps = con.prepareStatement("select id,balance from sdfc_bank_pro where account_num = ? and password = ?");
 			ps.setLong(1, account_num);
 			ps.setString(2, password);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				ps = con.prepareStatement("select balance from sdfc_bank_pro where account_num = ?");
+				int cid = rs.getInt(1);
+			   if(cid == 1) {
+				ps = con.prepareStatement("select id, balance from sdfc_bank_pro where account_num = ?");
 				ps.setLong(1, recipient_account);
 				ResultSet rs2 = ps.executeQuery();
 				if (rs2.next()) {
 					// complete logic here
-					double customers_current_balance = rs.getDouble(1);
-					double recipients_current_balance = rs2.getDouble(1);
+					double customers_current_balance = rs.getDouble(2);
+					int rid = rs2.getInt(1);
+				  if(rid == 1) {
+					double recipients_current_balance = rs2.getDouble(2);
 					if (customers_current_balance < transfer_amount) {
 
 						warning = "you don't have enough account balance";
@@ -75,19 +79,32 @@ public class TransferMoney extends HttpServlet {
 
 						RequestDispatcher dispatcher = request.getRequestDispatcher("transactionStatus.jsp");
 						dispatcher.forward(request, response);
-					}
+					} // inner else unsufficient balance
+				  }else {
+					    warning = "recipient account does not exists or deleted";
+						request.setAttribute("warning", warning);
+						RequestDispatcher dispatcher = request.getRequestDispatcher("transferMoney.jsp");
+						dispatcher.forward(request, response);
+				  }//rid
 				} else {
 					warning = "recipient account does not exists please check again";
 					request.setAttribute("warning", warning);
 					RequestDispatcher dispatcher = request.getRequestDispatcher("transferMoney.jsp");
 					dispatcher.forward(request, response);
-				}
-			} else {
+				} // else r2
+			}else {
+					warning = "Your account does not exist or deleted";
+					request.setAttribute("warning", warning);
+					RequestDispatcher dispatcher = request.getRequestDispatcher("transferMoney.jsp");
+					dispatcher.forward(request, response);
+			} // cid
+		  } 
+			  else {
 				warning = "your details are wrong please fill the correct values";
 				request.setAttribute("warning", warning);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("transferMoney.jsp");
 				dispatcher.forward(request, response);
-			}
+			} //main outer else
 
 			con.close();
 		} catch (NumberFormatException e) {

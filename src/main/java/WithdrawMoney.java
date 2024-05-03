@@ -35,13 +35,15 @@ public class WithdrawMoney extends HttpServlet {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "projects", "projects");
 			PreparedStatement ps = con.prepareStatement(
-					"select balance from sdfc_bank_pro where email = ? and account_num = ? and password = ?");
+					"select id,balance from sdfc_bank_pro where email = ? and account_num = ? and password = ?");
 			ps.setString(1, email);
 			ps.setLong(2, account_num);
 			ps.setString(3, password);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				double balance = rs.getDouble(1);
+				double id = rs.getInt(1);
+			   if(id==1) {
+				double balance = rs.getDouble(2);
 				out.println("<h1>" + balance + "</h1>");
 
 				if (balance < withdraw_amount) {
@@ -65,21 +67,28 @@ public class WithdrawMoney extends HttpServlet {
 						dispatcher.forward(request, response);
 					} else {
 						request.setAttribute("warning", "Transaction Failed Please try again");
-						RequestDispatcher dispatcher = request.getRequestDispatcher("depositeMoney.jsp");
+						RequestDispatcher dispatcher = request.getRequestDispatcher("withdrawMoney.jsp");
 						dispatcher.forward(request, response);
 					}
 				} // inner else
+			   } // id==1
+			   else {
+				  warning = "user does not exists";
+				  request.setAttribute("warning", warning);
+				  RequestDispatcher dispatcher = request.getRequestDispatcher("withdrawMoney.jsp");
+				  dispatcher.forward(request, response);
+			   }
 			} else {
 				warning = "User Does not exists please fill the correct values";
 				request.setAttribute("warning", warning);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("depositeMoney.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("withdrawMoney.jsp");
 				dispatcher.forward(request, response);
 			}
 			con.close();
 		} catch (NumberFormatException e) {
 			warning = "please fill all the with correct values";
 			request.setAttribute("warning", warning);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("depositeMoney.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("withdrawMoney.jsp");
 			dispatcher.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();

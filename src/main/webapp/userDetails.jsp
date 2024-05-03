@@ -27,10 +27,10 @@
 					<li><a href="index.html">Home</a></li>
 					<li><a href="newCustomer.jsp">new account</a></li>
 					<li><a class="active" href="getDetails.jsp">get details</a></li>
-					<li><a href="depositeMoney.jsp">deposite</a></li>
+					<li><a href="depositeMoney.jsp">deposit</a></li>
 					<li><a href="withdrawMoney.jsp">withdraw</a></li>
-					<li><a href="transferMoney.jsp">transefer</a></li>
-					<li><a href="deactivateAc.jsp"> close ac</a></li>
+					<li><a href="transferMoney.jsp">transfer</a></li>
+					<li><a href="deactivateAc.jsp"> close account</a></li>
 					<li><a href="about.html">about</a></li>
 				</ul>
 			</div>
@@ -38,23 +38,28 @@
 	</header>
 	<div class="main">
 		<div>
+			<%session.getAttribute("email"); %>
 			<table border="1">
 				<tr>
-					<% int columnCount = (int)request.getAttribute("columnCount");
-						for(String user: request.getAttribute("userDetails"))
-					  %>
-					
+					<%
+					String[] columns = (String[]) request.getAttribute("columnName");
+					String[] userData = (String[]) request.getAttribute("userDetails");
+					for (String col : columns) {
+					%>
+					<th><%=col%></th>
+					<%
+					}
+					%>
 				</tr>
-<!-- 				<tr>
-					<td>Active</td>
-					<td>Mohit</td>
-					<td>1234567890</td>
-					<td>9876543210</td>
-					<td>mohit@gmail.com</td>
-					<td>123450.00</td>
-					<td>mohit@123</td>
-				</tr> -->
+				<tr>
+					<%for (String user : userData) {%>					
+					<td><%=user%></td>
+					<%}%>
+				</tr>
 			</table>
+		</div>
+		<div>
+		 <a class="logout" href="Logout">logout</a>
 		</div>
 	</div>
 </body>
